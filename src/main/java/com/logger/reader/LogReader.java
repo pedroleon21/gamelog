@@ -1,16 +1,14 @@
 package com.logger.reader;
 
-import com.entities.Kill;
-import com.logger.exception.LineMapException;
+import com.entities.Game;
+import com.logger.Parser;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
 @RequestScoped
 public class LogReader {
@@ -18,6 +16,8 @@ public class LogReader {
     @ConfigProperty(name = "log.file.path")
     String filePath;
 
+    @Inject
+    Parser parser;
     public LogReader() {
     }
 
@@ -25,8 +25,8 @@ public class LogReader {
         this.filePath = filePath;
     }
 
-    public Hashtable<Integer, List<String>> mapAllGames() {
-        Hashtable<Integer,List<String>> games = new Hashtable<Integer, List<String>>();
+    public Hashtable<String, List<String>> mapAllGames() {
+        Hashtable<String,List<String>> games = new Hashtable<String, List<String>>();
         List<String> eventos = getAllEvents();
         int qtdGames=0;
         List<String> game = new ArrayList<>();
@@ -34,9 +34,12 @@ public class LogReader {
             if(evento.contains("-------------")) continue;
             if(evento.contains("ShutdownGame")){
                 game.add(evento);
-                games.put(qtdGames++,game);
+                games.put("game_" + qtdGames++,game);
             }
             game.add(evento);
+        }
+        for(Map.Entry<String,List<String>> gameSet : games.entrySet()){
+            Game parsedGame = parser.resumeGame(gameSet.getValue());
         }
         return games;
     }
@@ -53,16 +56,5 @@ public class LogReader {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-    protected Kill mapKill(String line){
-        if(!line.contains("Kill")){
-            throw new LineMapException("Erro ao mapear morte");
-        }
-        String[] splited = line.trim().split("Kill");
-        String time = splited[0];
-        splited = splited[1].trim().split(":");
-        String numbers = splited[1].trim();
-        String cause = splited[2];
-        return new Kill();
     }
 }

@@ -9,8 +9,4 @@ public class LogReaderTest extends LogReader{
     public List<String> readFile(){
         return getAllEvents();
     }
-
-    public void mapToKill(String killLine) {
-        mapKill(killLine);
-    }
 }
