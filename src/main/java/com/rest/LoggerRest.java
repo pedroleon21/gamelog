@@ -19,7 +19,7 @@ public class LoggerRest {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Hashtable<Integer, List<String>> queryOnLogfile() {
+    public Hashtable<String, List<String>> queryOnLogfile() {
         return service.query();
     }
 }

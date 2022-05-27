@@ -10,12 +10,11 @@ import java.util.List;
 
 @RequestScoped
 public class Service {
-
     @Inject
     DAO dao;
     @Inject
     LogReader reader;
-    public Hashtable<Integer, List<String>> query() {
+    public Hashtable<String, List<String>> query() {
         return reader.mapAllGames();
     }
 }
