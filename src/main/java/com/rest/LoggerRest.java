@@ -1,5 +1,6 @@
 package com.rest;
 
+import com.entities.Game;
 import com.service.Service;
 
 import javax.enterprise.context.RequestScoped;
@@ -16,10 +17,16 @@ import java.util.List;
 public class LoggerRest {
     @Inject
     Service service;
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Hashtable<String, List<String>> queryOnLogfile() {
+    public List<Game> buscarGames(){
+        return service.listaGames();
+    }
+
+    @Path("raw")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Hashtable<Integer, List<String>> queryOnLogfile() {
         return service.query();
     }
 }

@@ -1,6 +1,7 @@
 package com.service;
 
 import com.dao.DAO;
+import com.entities.Game;
 import com.logger.reader.LogReader;
 
 import javax.enterprise.context.RequestScoped;
@@ -14,7 +15,11 @@ public class Service {
     DAO dao;
     @Inject
     LogReader reader;
-    public Hashtable<String, List<String>> query() {
+    public Hashtable<Integer, List<String>> query() {
         return reader.readGames();
+    }
+
+    public List<Game> listaGames() {
+        return reader.listAllGames();
     }
 }
