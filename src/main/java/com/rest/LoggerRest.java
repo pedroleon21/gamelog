@@ -15,25 +15,23 @@ import java.util.List;
 
 @Path("v1/logger")
 @RequestScoped
+@Produces(MediaType.APPLICATION_JSON)
 public class LoggerRest {
     @Inject
     Service service;
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public List<Game> buscarGames(){
         return service.listaGames();
     }
 
     @GET
     @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Game pegarGame(@PathParam("id") Integer id){
         return service.pegarGame(id);
     }
 
     @Path("raw")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public Hashtable<Integer, List<String>> queryOnLogfile() {
         return service.query();
     }
