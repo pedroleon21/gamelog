@@ -1,7 +1,7 @@
 package com.service;
 
-import com.dao.DAO;
 import com.entities.Game;
+import com.entities.GameKillResume;
 import com.entities.ResumeGame;
 import com.logger.reader.LogReader;
 
@@ -9,12 +9,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 @RequestScoped
 public class Service {
-    @Inject
-    DAO dao;
     @Inject
     LogReader reader;
     public Hashtable<Integer, List<String>> query() {
@@ -36,5 +33,9 @@ public class Service {
             map.put("game_" + i,new ResumeGame(games.get(i)));
         }
         return map;
+    }
+
+    public List<GameKillResume> resumeKillsEPlacar() {
+        return reader.getKillResume();
     }
 }

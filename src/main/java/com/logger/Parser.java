@@ -1,5 +1,6 @@
 package com.logger;
 
+import com.entities.GameKillResume;
 import com.entities.Kill;
 import com.entities.Game;
 import com.logger.exception.LineMapException;
@@ -11,11 +12,24 @@ import java.util.stream.Collectors;
 @RequestScoped
 public class Parser {
 
+    public GameKillResume resumeKills(List<String> eventos) {
+        int totalKills = getTotalKills(eventos);
+//        List<String> causes = eventos.stream().filter()
+        return null;
+    }
     public Game resumeGame(List<String> eventos) {
-        int totalKills = eventos.stream().filter(e -> e.contains("Kill")).collect(Collectors.toList()).size();
-        List<Kill> kills = eventos.stream().filter(e -> e.contains("Kill")).map(l -> mapKill(l)).collect(Collectors.toList());
+        int totalKills = getTotalKills(eventos);
+        List<Kill> kills = getListKills(eventos);
         List<String> players = eventos.stream().filter(e->e.contains("ClientUserinfoChanged")).map(s->takeNamePlayer(s)).distinct().collect(Collectors.toList());
         return new Game(totalKills,kills,players);
+    }
+
+    private List<Kill> getListKills(List<String> eventos) {
+        return eventos.stream().filter(e -> e.contains("Kill")).map(l -> mapKill(l)).collect(Collectors.toList());
+    }
+
+    private int getTotalKills(List<String> eventos) {
+        return eventos.stream().filter(e -> e.contains("Kill")).collect(Collectors.toList()).size();
     }
 
     public Kill mapKill(String line){

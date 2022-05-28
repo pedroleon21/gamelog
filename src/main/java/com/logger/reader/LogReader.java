@@ -1,6 +1,7 @@
 package com.logger.reader;
 
 import com.entities.Game;
+import com.entities.GameKillResume;
 import com.logger.Parser;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -70,6 +71,15 @@ public class LogReader {
         List<Game> games = new ArrayList<>();
         for (Map.Entry<Integer,List<String>> entry : hashGames.entrySet()){
             games.add(parser.resumeGame(entry.getValue()));
+        }
+        return games;
+    }
+
+    public List<GameKillResume> getKillResume() {
+        Hashtable<Integer,List<String>> hashGames = readGames();
+        List<GameKillResume> games = new ArrayList<>();
+        for (Map.Entry<Integer,List<String>> entry : hashGames.entrySet()){
+            games.add(parser.resumeKills(entry.getValue()));
         }
         return games;
     }
