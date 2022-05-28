@@ -15,6 +15,7 @@ import java.util.List;
 public class Service {
     @Inject
     LogReader reader;
+
     public Hashtable<Integer, List<String>> query() {
         return reader.readGames();
     }
@@ -30,16 +31,16 @@ public class Service {
     public Hashtable<String, ResumeGame> getAllResumes() {
         List<Game> games = reader.listAllGames();
         Hashtable<String, ResumeGame> map = new Hashtable<String, ResumeGame>();
-        for(int i=0; i < games.size();i++){
+        for (int i = 0; i < games.size(); i++) {
             Game game = games.get(i);
             int totalKills = game.getTotalKills();
             List<String> players = game.getPlayers();
-            Hashtable<String,Long> table = new Hashtable<String,Long>();
+            Hashtable<String, Long> table = new Hashtable<String, Long>();
             players.forEach(p -> {
                 long total = game.getKills().stream().map(Kill::getKilled).filter(k -> k.equals(p)).count();
                 table.put(p, total);
             });
-            map.put("game_" + i,new ResumeGame(totalKills,players,table));
+            map.put("game_" + i, new ResumeGame(totalKills, players, table));
         }
         return map;
     }
