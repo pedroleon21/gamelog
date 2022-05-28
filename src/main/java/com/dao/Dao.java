@@ -26,23 +26,10 @@ public class Dao {
 
     public   List<String> getAllEvents() {
         String file = reader.read();
-        String[] eventos = file.split("\\n");
-        return Arrays.asList(eventos);
+        return Parser.breakLines(file);
     }
     public Hashtable<Integer, List<String>> readGames() {
-        Hashtable<Integer, List<String>> games = new Hashtable<Integer, List<String>>();
-        List<String> eventos = getAllEvents();
-        int qtdGames = 0;
-        List<String> game = new ArrayList<>();
-        for (String evento : eventos) {
-            if (evento.contains("-------------")) continue;
-            if (evento.contains("InitGame")) {
-                game = new ArrayList<>();
-                games.put(qtdGames++, game);
-            }
-            game.add(evento);
-        }
-        return games;
+        return Parser.eventosToGames(getAllEvents());
     }
 
     public List<GameScore> getKillResume() {

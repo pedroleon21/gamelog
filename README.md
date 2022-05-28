@@ -21,5 +21,5 @@ Por padrão a aplicação será exposta na rota http://localhost:5000
 * lista de games e lista de kills http://localhost:5000/v1/logger
 * game com lista de kills http://localhost:5000/v1/logger/{indexGame}
 ## Testes
-Para execução dos teste do pacote `com.integration` é necessário que a api esteja em funcionamento;
-Os demais testes são teste unitários e os recursos são providos dentro das proprias classes.
+Para execução dos testes do pacote `com.integration` é necessário que a api esteja em funcionamento;
+Os demais testes são testes unitários e os recursos são providos dentro das proprias classes.
