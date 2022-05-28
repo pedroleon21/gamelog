@@ -1,9 +1,10 @@
-package com.reader;
+package com.dao;
 
 
-import com.dao.Dao;
 import com.entries.Game;
 import com.entries.Kill;
+import com.reader.LogReader;
+import com.reader.Parser;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +12,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Objects;
 
-public class ParserTester {
-    Parser parser = new Parser();
+public class DaoTester {
     static String filePath = "games.log";
     static Dao dao = new Dao(new LogReader(filePath));
     static String killLine;
@@ -41,7 +41,7 @@ public class ParserTester {
 
     @Test
     void maperKill() {
-        Kill kill = parser.mapKill(killLine);
+        Kill kill = Parser.mapKill(killLine);
         assert (Objects.nonNull(kill));
         assert killLine.contains(kill.getKilled());
         assert killLine.contains(kill.getCause());
@@ -50,7 +50,7 @@ public class ParserTester {
 
     @Test
     void maperWorldKill() {
-        Kill kill = parser.mapKill(worldKillLine);
+        Kill kill = Parser.mapKill(worldKillLine);
         assert (Objects.nonNull(kill));
         assert worldKillLine.contains(kill.getKilled());
         assert worldKillLine.contains(kill.getCause());
@@ -59,13 +59,13 @@ public class ParserTester {
 
     @Test
     void mapGame() {
-        Game game = parser.resumeGame(dao.readGames().get(2));
+        Game game = Parser.resumeGame(dao.readGames().get(2));
         assert (Objects.nonNull(game));
     }
 
     @Test
     void getNamePlayer() {
-        String player = parser.takeNamePlayer(clientUserInfoLine);
+        String player = Parser.takeNamePlayer(clientUserInfoLine);
         assert (Objects.nonNull(player));
         assert (!player.isEmpty());
         System.out.println(player);
