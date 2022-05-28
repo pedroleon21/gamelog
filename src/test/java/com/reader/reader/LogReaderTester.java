@@ -1,4 +1,4 @@
-package com.logger.reader;
+package com.reader.reader;
 
 import org.junit.jupiter.api.Test;
 

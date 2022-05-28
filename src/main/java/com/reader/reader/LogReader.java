@@ -1,12 +1,11 @@
-package com.logger.reader;
+package com.reader.reader;
 
 import com.entries.Game;
 import com.entries.GameScore;
-import com.logger.Parser;
+import com.reader.Parser;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;

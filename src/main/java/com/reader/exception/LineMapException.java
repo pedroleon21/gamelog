@@ -1,4 +1,4 @@
-package com.logger.exception;
+package com.reader.exception;
 
 public class LineMapException extends RuntimeException {
     public LineMapException(String messege) {
