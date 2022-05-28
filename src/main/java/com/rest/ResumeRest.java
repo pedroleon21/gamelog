@@ -25,8 +25,8 @@ public class ResumeRest {
         return service.getAllResumes();
     }
     @GET
-    @Path("/game/{game-key}")
-    public ResumeGame pegarGame(@PathParam("game-key") String gameKey){
+    @Path("game/{gameKey}")
+    public ResumeGame pegarGame(@PathParam("gameKey") String gameKey){
         return service.pegarReumo(gameKey);
     }
     @GET
