@@ -17,7 +17,7 @@ public class ResumeRestTester extends RestAssuredUtils {
         getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()
-                .get("resumo")
+                .get("resumo/game")
                 .then()
                 .assertThat()
                 .statusCode(Response.Status.OK.getStatusCode());
@@ -40,7 +40,7 @@ public class ResumeRestTester extends RestAssuredUtils {
         GameScore[] placareSet = getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()
-                .get("resumo/scores")
+                .get("resumo/score")
                 .then()
                 .assertThat()
                 .statusCode(Response.Status.OK.getStatusCode())

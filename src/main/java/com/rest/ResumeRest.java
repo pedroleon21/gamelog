@@ -21,6 +21,7 @@ public class ResumeRest {
     @Inject
     Service service;
     @GET
+    @Path("game")
     public Hashtable<String, ResumeGame> resumeGames(){
         return service.getAllResumes();
     }
@@ -30,8 +31,13 @@ public class ResumeRest {
         return service.pegarReumo(gameKey);
     }
     @GET
-    @Path("scores")
+    @Path("score")
     public List<GameScore> buscarScoreAll(){
         return service.resumirScores();
+    }
+    @GET
+    @Path("score/{idGame}")
+    public GameScore buscarScore(@PathParam("idGame") Integer idGame){
+        return service.resumirScores().get(idGame);
     }
 }
