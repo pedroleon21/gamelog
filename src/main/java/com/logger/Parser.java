@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @RequestScoped
 public class Parser {
 
-    public GameScore resumeKills(List<String> eventos) {
+    public static GameScore resumeKills(List<String> eventos) {
         int totalKills = getTotalKills(eventos);
         List<String> players = eventos.stream().filter(e -> e.contains("ClientUserinfoChanged")).map(s -> takeNamePlayer(s)).distinct().collect(Collectors.toList());
         List<Kill> kills = getListKills(eventos);
@@ -21,27 +21,27 @@ public class Parser {
         players.forEach(p -> {
             Long playerKills = kills.stream().filter(k -> k.getKiller().equals(p)).count();
             Long playerMortesParaWorld = kills.stream().filter(k -> k.getKiller().equals("world")).count();
-            score.put(p,playerKills-playerMortesParaWorld);
+            score.put(p, playerKills - playerMortesParaWorld);
         });
         return new GameScore(totalKills, score);
     }
 
-    public Game resumeGame(List<String> eventos) {
+    public static Game resumeGame(List<String> eventos) {
         int totalKills = getTotalKills(eventos);
         List<Kill> kills = getListKills(eventos);
         List<String> players = eventos.stream().filter(e -> e.contains("ClientUserinfoChanged")).map(s -> takeNamePlayer(s)).distinct().collect(Collectors.toList());
         return new Game(totalKills, kills, players);
     }
 
-    private List<Kill> getListKills(List<String> eventos) {
+    private static List<Kill> getListKills(List<String> eventos) {
         return eventos.stream().filter(e -> e.contains("Kill")).map(l -> mapKill(l)).collect(Collectors.toList());
     }
 
-    private int getTotalKills(List<String> eventos) {
+    private static int getTotalKills(List<String> eventos) {
         return eventos.stream().filter(e -> e.contains("Kill")).collect(Collectors.toList()).size();
     }
 
-    public Kill mapKill(String line) {
+    public static Kill mapKill(String line) {
         if (!line.contains("Kill")) {
             throw new LineMapException("Erro ao mapear morte");
         }
@@ -55,7 +55,7 @@ public class Parser {
         return new Kill(killer, killed, cause, time);
     }
 
-    public String takeNamePlayer(String line) {
+    public static String takeNamePlayer(String line) {
         return line.trim().split("n\\\\")[1].trim().split("\\\\t")[0];
     }
 }

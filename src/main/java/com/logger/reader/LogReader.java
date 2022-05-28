@@ -17,24 +17,28 @@ public class LogReader {
     @ConfigProperty(name = "log.file.path")
     String filePath;
 
-    @Inject
-    Parser parser;
 
     public LogReader() {
     }
 
-    public LogReader(String filePath, Parser parser) {
+    public LogReader(String filePath) {
         this.filePath = filePath;
-        this.parser = parser;
     }
-
+    //talvez mudar para streaming de arquivo??
+    public String read() {
+        try {
+            return Files.readString(Path.of(filePath));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     public Game getGeme(int gameNumber) {
         Hashtable<Integer, List<String>> hashGames = readGames();
         if (gameNumber >= hashGames.size()) {
             throw new IndexOutOfBoundsException("fora da quantidade de games");
         }
 
-        return parser.resumeGame(hashGames.get(gameNumber));
+        return Parser.resumeGame(hashGames.get(gameNumber));
     }
 
     public Hashtable<Integer, List<String>> readGames() {
@@ -53,26 +57,19 @@ public class LogReader {
         return games;
     }
 
-    protected List<String> getAllEvents() {
+    public List<String> getAllEvents() {
         String file = read();
         String[] eventos = file.split("\\n");
         return Arrays.asList(eventos);
     }
 
-    //talvez mudar para streaming de arquivo??
-    private String read() {
-        try {
-            return Files.readString(Path.of(filePath));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     public List<Game> listAllGames() {
         Hashtable<Integer, List<String>> hashGames = readGames();
         List<Game> games = new ArrayList<>();
         for (int i = 0; i < hashGames.size(); i++) {
-            games.add(parser.resumeGame(hashGames.get(i)));
+            games.add(Parser.resumeGame(hashGames.get(i)));
         }
         return games;
     }
@@ -81,7 +78,7 @@ public class LogReader {
         Hashtable<Integer, List<String>> hashGames = readGames();
         List<GameScore> games = new ArrayList<>();
         for (int i = 0; i < hashGames.size(); i++) {
-            games.add(parser.resumeKills(hashGames.get(i)));
+            games.add(Parser.resumeKills(hashGames.get(i)));
         }
         return games;
     }

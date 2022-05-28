@@ -3,7 +3,7 @@ package com.logger;
 
 import com.entries.Game;
 import com.entries.Kill;
-import com.logger.reader.LogReaderTest;
+import com.logger.reader.LogReader;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -13,14 +13,26 @@ import java.util.Objects;
 public class ParserTester {
     Parser parser = new Parser();
     static String filePath = "games.log";
-    static LogReaderTest logReader = new LogReaderTest(filePath, new Parser());
+    static LogReader logReader = new LogReader(filePath);
     static String killLine;
     private static String worldKillLine;
     private static String clientUserInfoLine;
+//    @Test
+//    void pegarTodosEventos(){
+//        Hashtable<Integer, List<String>> eventos = logReader.readGames();
+//        assert (!eventos.isEmpty());
+//    }
+//    @Test
+//    void pegarGame(){
+//        for(int i =0; i < 20;i++){//existem 20 jogos
+//            Game game = logReader.getGeme(i);
+//            assert (Objects.nonNull(game));
+//        }
+//    }
 
     @BeforeAll
     static void pegarUmaKill() {
-        List<String> eventos = logReader.readFile();
+        List<String> eventos = logReader.getAllEvents();
         killLine = eventos.stream().filter(x -> x.contains("Kill") && !x.contains("<world>")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
         worldKillLine = eventos.stream().filter(x -> x.contains("Kill") && x.contains("<world>")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
         clientUserInfoLine = eventos.stream().filter(x -> x.contains("ClientUserinfoChanged")).findFirst().map(x -> x).orElseThrow(RuntimeException::new); //ClientUserinfoChanged
