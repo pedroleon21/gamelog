@@ -24,7 +24,7 @@ public class ResumeRest {
         return service.getAllResumes();
     }
     @GET
-    @Path("kills")
+    @Path("score")
     public List<GameScore> buscarKillResume(){
         return service.resumeKillsEPlacar();
     }

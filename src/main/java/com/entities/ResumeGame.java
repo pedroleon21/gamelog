@@ -16,6 +16,7 @@ public class ResumeGame {
         super();
         this.totalKills = totalKills;
         this.players = players;
+        this.kills = kills;
     }
 
     public Hashtable<String, Long> getKills() {
