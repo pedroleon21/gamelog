@@ -32,6 +32,6 @@ public class Parser {
         return new Kill(killer,killed,cause,time);
     }
     public String takeNamePlayer(String line){
-        return line.trim().split("n\\\\")[1].trim().split("\\\\t\\\\0")[0];
+        return line.trim().split("n\\\\")[1].trim().split("\\\\t")[0];
     }
 }
