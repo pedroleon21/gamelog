@@ -1,37 +1,39 @@
 package com.reader;
 
 
+import com.dao.Dao;
 import com.entries.Game;
 import com.entries.Kill;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Objects;
 
 public class ParserTester {
     Parser parser = new Parser();
     static String filePath = "games.log";
-    static LogReader logReader = new LogReader(filePath);
+    static Dao dao = new Dao(new LogReader(filePath));
     static String killLine;
     private static String worldKillLine;
     private static String clientUserInfoLine;
-//    @Test
-//    void pegarTodosEventos(){
-//        Hashtable<Integer, List<String>> eventos = logReader.readGames();
-//        assert (!eventos.isEmpty());
-//    }
-//    @Test
-//    void pegarGame(){
-//        for(int i =0; i < 20;i++){//existem 20 jogos
-//            Game game = logReader.getGeme(i);
-//            assert (Objects.nonNull(game));
-//        }
-//    }
+    @Test
+    void pegarTodosEventos(){
+        Hashtable<Integer, List<String>> eventos = dao.readGames();
+        assert (!eventos.isEmpty());
+    }
+    @Test
+    void pegarGame(){
+        for(int i =0; i < 20;i++){//existem 20 jogos
+            Game game = dao.getGeme(i);
+            assert (Objects.nonNull(game));
+        }
+    }
 
     @BeforeAll
     static void pegarUmaKill() {
-        List<String> eventos = logReader.getAllEvents();
+        List<String> eventos = dao.getAllEvents();
         killLine = eventos.stream().filter(x -> x.contains("Kill") && !x.contains("<world>")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
         worldKillLine = eventos.stream().filter(x -> x.contains("Kill") && x.contains("<world>")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
         clientUserInfoLine = eventos.stream().filter(x -> x.contains("ClientUserinfoChanged")).findFirst().map(x -> x).orElseThrow(RuntimeException::new); //ClientUserinfoChanged
@@ -57,7 +59,7 @@ public class ParserTester {
 
     @Test
     void mapGame() {
-        Game game = parser.resumeGame(logReader.readGames().get(2));
+        Game game = parser.resumeGame(dao.readGames().get(2));
         assert (Objects.nonNull(game));
     }
 

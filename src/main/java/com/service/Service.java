@@ -1,5 +1,6 @@
 package com.service;
 
+import com.dao.Dao;
 import com.entries.Game;
 import com.entries.GameScore;
 import com.entries.Kill;
@@ -14,22 +15,22 @@ import java.util.List;
 @RequestScoped
 public class Service {
     @Inject
-    LogReader reader;
+    Dao dao;
 
     public Hashtable<Integer, List<String>> query() {
-        return reader.readGames();
+        return dao.readGames();
     }
 
     public List<Game> listaGames() {
-        return reader.listAllGames();
+        return dao.listAllGames();
     }
 
     public Game pegarGame(Integer id) {
-        return reader.getGeme(id);
+        return dao.getGeme(id);
     }
 
     public Hashtable<String, ResumeGame> getAllResumes() {
-        List<Game> games = reader.listAllGames();
+        List<Game> games = dao.listAllGames();
         Hashtable<String, ResumeGame> map = new Hashtable<String, ResumeGame>();
         for (int i = 0; i < games.size(); i++) {
             Game game = games.get(i);
@@ -46,7 +47,7 @@ public class Service {
     }
 
     public List<GameScore> resumirScores() {
-        return reader.getKillResume();
+        return dao.getKillResume();
     }
 
     public ResumeGame pegarReumo(String gameKey) {
