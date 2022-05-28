@@ -4,7 +4,7 @@ package com.logger;
 import com.entities.Game;
 import com.entities.Kill;
 import com.logger.reader.LogReaderTest;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,14 +12,14 @@ import java.util.Objects;
 
 public class ParserTester {
     Parser parser = new Parser();
-    String filePath = "games.log";
-    LogReaderTest logReader = new LogReaderTest(filePath, new Parser());
-    String killLine;
-    private String worldKillLine;
-    private String clientUserInfoLine;
+    static String filePath = "games.log";
+    static LogReaderTest logReader = new LogReaderTest(filePath, new Parser());
+    static String killLine;
+    private static String worldKillLine;
+    private static String clientUserInfoLine;
 
-    @BeforeEach
-    void pegarUmaKill() {
+    @BeforeAll
+    static void pegarUmaKill() {
         List<String> eventos = logReader.readFile();
         killLine = eventos.stream().filter(x -> x.contains("Kill") && !x.contains("<world>")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
         worldKillLine = eventos.stream().filter(x -> x.contains("Kill") && x.contains("<world>")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
