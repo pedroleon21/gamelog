@@ -1,5 +1,6 @@
 package com.logger.reader;
 
+import com.entities.Game;
 import com.logger.Parser;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -17,23 +18,33 @@ public class LogReader {
 
     @Inject
     Parser parser;
+
     public LogReader() {
     }
 
-    public LogReader(String filePath) {
+    public LogReader(String filePath, Parser parser) {
         this.filePath = filePath;
+        this.parser = parser;
     }
 
-    public Hashtable<String, List<String>> readGames() {
-        Hashtable<String,List<String>> games = new Hashtable<String, List<String>>();
+    public Game getGeme(int gameNumber){
+        Hashtable<Integer,List<String>> hashGames = readGames();
+        if(gameNumber >= hashGames.size()){
+            throw new IndexOutOfBoundsException("fora da quantidade de games");
+        }
+
+        return parser.resumeGame(hashGames.get(gameNumber));
+    }
+    public Hashtable<Integer, List<String>> readGames() {
+        Hashtable<Integer,List<String>> games = new Hashtable<Integer, List<String>>();
         List<String> eventos = getAllEvents();
         int qtdGames=0;
         List<String> game = new ArrayList<>();
         for (String evento : eventos) {
             if(evento.contains("-------------")) continue;
-            if(evento.contains("ShutdownGame")){
-                game.add(evento);
-                games.put("game_" + qtdGames++,game);
+            if(evento.contains("InitGame")){
+                game = new ArrayList<>();
+                games.put(qtdGames++,game);
             }
             game.add(evento);
         }
