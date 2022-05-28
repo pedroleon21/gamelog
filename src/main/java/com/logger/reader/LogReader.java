@@ -79,8 +79,8 @@ public class LogReader {
     public List<GameScore> getKillResume() {
         Hashtable<Integer, List<String>> hashGames = readGames();
         List<GameScore> games = new ArrayList<>();
-        for (Map.Entry<Integer, List<String>> entry : hashGames.entrySet()) {
-            games.add(parser.resumeKills(entry.getValue()));
+        for (int i = 0; i < hashGames.size(); i++) {
+            games.add(parser.resumeKills(hashGames.get(i)));
         }
         return games;
     }
