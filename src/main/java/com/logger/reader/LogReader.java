@@ -64,4 +64,13 @@ public class LogReader {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Game> listAllGames() {
+        Hashtable<Integer,List<String>> hashGames = readGames();
+        List<Game> games = new ArrayList<>();
+        for (Map.Entry<Integer,List<String>> entry : hashGames.entrySet()){
+            games.add(parser.resumeGame(entry.getValue()));
+        }
+        return games;
+    }
 }
