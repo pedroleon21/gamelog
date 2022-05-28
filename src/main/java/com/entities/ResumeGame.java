@@ -12,15 +12,10 @@ public class ResumeGame {
     @JsonProperty("total_kills")
     private Integer totalKills;
 
-    public ResumeGame(Game game) {
-        totalKills = game.getTotalKills();
-        players = game.getPlayers();
-        Hashtable<String,Long> table = new Hashtable<String,Long>();
-        players.forEach(p -> {
-            long totalKills = game.getKills().stream().map(Kill::getKilled).filter(k -> k.equals(p)).count();
-            table.put(p, totalKills);
-        });
-        kills = table;
+    public ResumeGame(int totalKills, List<String> players, Hashtable<String, Long> kills) {
+        super();
+        this.totalKills = totalKills;
+        this.players = players;
     }
 
     public Hashtable<String, Long> getKills() {

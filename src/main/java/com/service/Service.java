@@ -2,6 +2,7 @@ package com.service;
 
 import com.entities.Game;
 import com.entities.GameKillResume;
+import com.entities.Kill;
 import com.entities.ResumeGame;
 import com.logger.reader.LogReader;
 
@@ -30,7 +31,15 @@ public class Service {
         List<Game> games = reader.listAllGames();
         Hashtable<String, ResumeGame> map = new Hashtable<String, ResumeGame>();
         for(int i=0; i < games.size();i++){
-            map.put("game_" + i,new ResumeGame(games.get(i)));
+            Game game = games.get(i);
+            int totalKills = game.getTotalKills();
+            List<String> players = game.getPlayers();
+            Hashtable<String,Long> table = new Hashtable<String,Long>();
+            players.forEach(p -> {
+                long total = game.getKills().stream().map(Kill::getKilled).filter(k -> k.equals(p)).count();
+                table.put(p, total);
+            });
+            map.put("game_" + i,new ResumeGame(totalKills,players,table));
         }
         return map;
     }
