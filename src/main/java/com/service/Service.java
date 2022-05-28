@@ -15,6 +15,6 @@ public class Service {
     @Inject
     LogReader reader;
     public Hashtable<String, List<String>> query() {
-        return reader.mapAllGames();
+        return reader.readGames();
     }
 }

@@ -39,4 +39,8 @@ public class ParserTester {
         assert worldKillLine.contains(kill.getCause());
         assert worldKillLine.contains(kill.getTime());
     }
+    @Test
+    void mapGame(){
+//        parser.resumeGame()
+    }
 }

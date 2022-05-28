@@ -12,7 +12,7 @@ public class LogReaderTester {
     LogReaderTest logReader = new LogReaderTest(filePath);
     @Test
     void pegarTodosEventos(){
-        Hashtable<String, List<String>> eventos = logReader.mapAllGames();
+        Hashtable<String, List<String>> eventos = logReader.readGames();
         assert (!eventos.isEmpty());
     }
 }

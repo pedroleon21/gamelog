@@ -1,6 +1,5 @@
 package com.logger.reader;
 
-import com.entities.Game;
 import com.logger.Parser;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -25,7 +24,7 @@ public class LogReader {
         this.filePath = filePath;
     }
 
-    public Hashtable<String, List<String>> mapAllGames() {
+    public Hashtable<String, List<String>> readGames() {
         Hashtable<String,List<String>> games = new Hashtable<String, List<String>>();
         List<String> eventos = getAllEvents();
         int qtdGames=0;
@@ -37,9 +36,6 @@ public class LogReader {
                 games.put("game_" + qtdGames++,game);
             }
             game.add(evento);
-        }
-        for(Map.Entry<String,List<String>> gameSet : games.entrySet()){
-            Game parsedGame = parser.resumeGame(gameSet.getValue());
         }
         return games;
     }
