@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-public class ResumeRestTester extends RestAssuredUtils {
+public class GameRestTester extends RestAssuredUtils {
     @Test
     void resumoGemes() {
         getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()
-                .get("resumo/game")
+                .get("game")
                 .then()
                 .assertThat()
                 .statusCode(Response.Status.OK.getStatusCode());
@@ -27,7 +27,7 @@ public class ResumeRestTester extends RestAssuredUtils {
         ResumeGame placar = getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()
-                .get("resumo/game/game_" + new Random().nextInt(21))
+                .get("game/game_" + new Random().nextInt(21))
                 .then()
                 .assertThat()
                 .statusCode(Response.Status.OK.getStatusCode())
@@ -35,19 +35,4 @@ public class ResumeRestTester extends RestAssuredUtils {
                 .as(ResumeGame.class);
         assert (Objects.nonNull(placar));
     }
-    @Test
-    void listaDePlacares(){
-        GameScore[] placareSet = getConfiguredGiven()
-                .contentType(MediaType.APPLICATION_JSON)
-                .log().all()
-                .get("resumo/score")
-                .then()
-                .assertThat()
-                .statusCode(Response.Status.OK.getStatusCode())
-                .extract()
-                .as(GameScore[].class);
-        List<GameScore> placarList = Arrays.asList(placareSet);
-        assert (!placarList.isEmpty());
-    }
-
 }
