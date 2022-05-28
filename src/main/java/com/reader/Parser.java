@@ -3,7 +3,6 @@ package com.reader;
 import com.entries.GameScore;
 import com.entries.Kill;
 import com.entries.Game;
-import com.reader.exception.LineMapException;
 
 import javax.enterprise.context.RequestScoped;
 import java.util.Hashtable;

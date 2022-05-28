@@ -1,5 +1,6 @@
 package com.reader.reader;
 
+import com.reader.LogReader;
 import org.junit.jupiter.api.Test;
 
 public class LogReaderTester {

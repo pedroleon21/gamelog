@@ -3,7 +3,6 @@ package com.reader;
 
 import com.entries.Game;
 import com.entries.Kill;
-import com.reader.reader.LogReader;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

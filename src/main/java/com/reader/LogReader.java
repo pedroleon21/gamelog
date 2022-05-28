@@ -1,4 +1,4 @@
-package com.reader.reader;
+package com.reader;
 
 import com.entries.Game;
 import com.entries.GameScore;

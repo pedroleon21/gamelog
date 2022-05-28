@@ -4,7 +4,7 @@ import com.entries.Game;
 import com.entries.GameScore;
 import com.entries.Kill;
 import com.entries.ResumeGame;
-import com.reader.reader.LogReader;
+import com.reader.LogReader;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
