@@ -1,7 +1,7 @@
 package com.logger.reader;
 
-import com.entities.Game;
-import com.entities.GameScore;
+import com.entries.Game;
+import com.entries.GameScore;
 import com.logger.Parser;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 

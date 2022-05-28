@@ -1,6 +1,6 @@
 package com.integration;
 
-import com.entities.Game;
+import com.entries.Game;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.MediaType;

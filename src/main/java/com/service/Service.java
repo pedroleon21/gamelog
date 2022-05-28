@@ -1,9 +1,9 @@
 package com.service;
 
-import com.entities.Game;
-import com.entities.GameScore;
-import com.entities.Kill;
-import com.entities.ResumeGame;
+import com.entries.Game;
+import com.entries.GameScore;
+import com.entries.Kill;
+import com.entries.ResumeGame;
 import com.logger.reader.LogReader;
 
 import javax.enterprise.context.RequestScoped;

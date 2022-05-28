@@ -1,7 +1,6 @@
-package com.entities;
+package com.entries;
 
 import java.util.Hashtable;
-import java.util.List;
 
 public class GameScore {
     private int totalKills;

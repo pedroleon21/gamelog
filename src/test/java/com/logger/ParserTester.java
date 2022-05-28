@@ -1,8 +1,8 @@
 package com.logger;
 
 
-import com.entities.Game;
-import com.entities.Kill;
+import com.entries.Game;
+import com.entries.Kill;
 import com.logger.reader.LogReaderTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

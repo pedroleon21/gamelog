@@ -1,4 +1,4 @@
-package com.entities;
+package com.entries;
 
 public class Kill {
 

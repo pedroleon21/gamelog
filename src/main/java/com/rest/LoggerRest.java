@@ -1,6 +1,6 @@
 package com.rest;
 
-import com.entities.Game;
+import com.entries.Game;
 import com.service.Service;
 
 import javax.enterprise.context.RequestScoped;

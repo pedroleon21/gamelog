@@ -1,13 +1,12 @@
 package com.logger.reader;
 
-import com.entities.Game;
+import com.entries.Game;
 import com.logger.Parser;
 import org.junit.jupiter.api.*;
 
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LogReaderTester {

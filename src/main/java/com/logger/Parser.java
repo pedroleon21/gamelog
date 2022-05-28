@@ -1,8 +1,8 @@
 package com.logger;
 
-import com.entities.GameScore;
-import com.entities.Kill;
-import com.entities.Game;
+import com.entries.GameScore;
+import com.entries.Kill;
+import com.entries.Game;
 import com.logger.exception.LineMapException;
 
 import javax.enterprise.context.RequestScoped;

@@ -1,7 +1,7 @@
 package com.integration;
 
-import com.entities.GameScore;
-import com.entities.ResumeGame;
+import com.entries.GameScore;
+import com.entries.ResumeGame;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.MediaType;

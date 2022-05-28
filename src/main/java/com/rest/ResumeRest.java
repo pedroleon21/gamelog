@@ -1,7 +1,7 @@
 package com.rest;
 
-import com.entities.GameScore;
-import com.entities.ResumeGame;
+import com.entries.GameScore;
+import com.entries.ResumeGame;
 import com.service.Service;
 
 import javax.enterprise.context.RequestScoped;
