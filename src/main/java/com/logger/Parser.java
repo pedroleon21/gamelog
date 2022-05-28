@@ -10,14 +10,12 @@ import java.util.stream.Collectors;
 
 @RequestScoped
 public class Parser {
-    private List<Kill> kills;
-    private int totalKills;
 
     public Game resumeGame(List<String> eventos) {
-        totalKills = eventos.stream().filter(e->e.contains("Kill")).collect(Collectors.toList()).size();
-        kills = eventos.stream().filter(e->e.contains("Kill") && !e.contains("<world>")).map(l->mapKill(l)).collect(Collectors.toList());
-
-        return null;
+        int totalKills = eventos.stream().filter(e -> e.contains("Kill")).collect(Collectors.toList()).size();
+        List<Kill> kills = eventos.stream().filter(e -> e.contains("Kill") && !e.contains("<world>")).map(l -> mapKill(l)).collect(Collectors.toList());
+        List<String> players = eventos.stream().filter(e->e.contains("ClientUserinfoChanged")).map(s->takeNamePlayer(s)).distinct().collect(Collectors.toList());
+        return new Game(totalKills,kills,players);
     }
 
     public Kill mapKill(String line){
@@ -32,5 +30,8 @@ public class Parser {
         String killed = splited[2].split("killed")[1].trim().split("by")[0].trim();
         String cause = splited[2].split("killed")[1].trim().split("by")[1].trim();
         return new Kill(killer,killed,cause,time);
+    }
+    public String takeNamePlayer(String line){
+        return line.trim().split("n\\\\")[1].trim().split("\\\\t\\\\0")[0];
     }
 }
