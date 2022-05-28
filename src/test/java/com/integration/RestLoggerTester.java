@@ -7,6 +7,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
 
 public class RestLoggerTester extends RestAssuredUtils{
@@ -33,5 +35,18 @@ public class RestLoggerTester extends RestAssuredUtils{
                 .as(Game[].class);
         List<Game> gamesList = Arrays.asList(gamesSet);
         assert (!gamesList.isEmpty());
+    }
+    @Test
+    void getGame(){
+        Game game = getConfiguredGiven()
+                .contentType(MediaType.APPLICATION_JSON)
+                .log().all()
+                .get("logger/" + new Random().nextInt(21))
+                .then()
+                .assertThat()
+                .statusCode(Response.Status.OK.getStatusCode())
+                .extract()
+                .as(Game.class);
+        assert (Objects.nonNull(game));
     }
 }

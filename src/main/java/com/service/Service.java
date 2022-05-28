@@ -22,4 +22,8 @@ public class Service {
     public List<Game> listaGames() {
         return reader.listAllGames();
     }
+
+    public Game pegarGame(Integer id) {
+        return reader.getGeme(id);
+    }
 }
