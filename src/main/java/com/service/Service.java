@@ -1,7 +1,7 @@
 package com.service;
 
 import com.entities.Game;
-import com.entities.GameKillResume;
+import com.entities.GameScore;
 import com.entities.Kill;
 import com.entities.ResumeGame;
 import com.logger.reader.LogReader;
@@ -44,7 +44,7 @@ public class Service {
         return map;
     }
 
-    public List<GameKillResume> resumeKillsEPlacar() {
+    public List<GameScore> resumeKillsEPlacar() {
         return reader.getKillResume();
     }
 }

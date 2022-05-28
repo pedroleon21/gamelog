@@ -1,6 +1,6 @@
 package com.rest;
 
-import com.entities.GameKillResume;
+import com.entities.GameScore;
 import com.entities.ResumeGame;
 import com.service.Service;
 
@@ -8,7 +8,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Hashtable;
@@ -26,7 +25,7 @@ public class ResumeRest {
     }
     @GET
     @Path("kills")
-    public List<GameKillResume> buscarKillResume(){
+    public List<GameScore> buscarKillResume(){
         return service.resumeKillsEPlacar();
     }
 }
