@@ -28,24 +28,25 @@ public class LogReader {
         this.parser = parser;
     }
 
-    public Game getGeme(int gameNumber){
-        Hashtable<Integer,List<String>> hashGames = readGames();
-        if(gameNumber >= hashGames.size()){
+    public Game getGeme(int gameNumber) {
+        Hashtable<Integer, List<String>> hashGames = readGames();
+        if (gameNumber >= hashGames.size()) {
             throw new IndexOutOfBoundsException("fora da quantidade de games");
         }
 
         return parser.resumeGame(hashGames.get(gameNumber));
     }
+
     public Hashtable<Integer, List<String>> readGames() {
-        Hashtable<Integer,List<String>> games = new Hashtable<Integer, List<String>>();
+        Hashtable<Integer, List<String>> games = new Hashtable<Integer, List<String>>();
         List<String> eventos = getAllEvents();
-        int qtdGames=0;
+        int qtdGames = 0;
         List<String> game = new ArrayList<>();
         for (String evento : eventos) {
-            if(evento.contains("-------------")) continue;
-            if(evento.contains("InitGame")){
+            if (evento.contains("-------------")) continue;
+            if (evento.contains("InitGame")) {
                 game = new ArrayList<>();
-                games.put(qtdGames++,game);
+                games.put(qtdGames++, game);
             }
             game.add(evento);
         }
@@ -67,18 +68,18 @@ public class LogReader {
     }
 
     public List<Game> listAllGames() {
-        Hashtable<Integer,List<String>> hashGames = readGames();
+        Hashtable<Integer, List<String>> hashGames = readGames();
         List<Game> games = new ArrayList<>();
-        for (Map.Entry<Integer,List<String>> entry : hashGames.entrySet()){
-            games.add(parser.resumeGame(entry.getValue()));
+        for (int i = 0; i < hashGames.size(); i++) {
+            games.add(parser.resumeGame(hashGames.get(i)));
         }
         return games;
     }
 
     public List<GameScore> getKillResume() {
-        Hashtable<Integer,List<String>> hashGames = readGames();
+        Hashtable<Integer, List<String>> hashGames = readGames();
         List<GameScore> games = new ArrayList<>();
-        for (Map.Entry<Integer,List<String>> entry : hashGames.entrySet()){
+        for (Map.Entry<Integer, List<String>> entry : hashGames.entrySet()) {
             games.add(parser.resumeKills(entry.getValue()));
         }
         return games;
