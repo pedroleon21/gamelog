@@ -45,7 +45,11 @@ public class Service {
         return map;
     }
 
-    public List<GameScore> resumeKillsEPlacar() {
+    public List<GameScore> resumirScores() {
         return reader.getKillResume();
+    }
+
+    public ResumeGame pegarReumo(String gameKey) {
+        return getAllResumes().get(gameKey);
     }
 }

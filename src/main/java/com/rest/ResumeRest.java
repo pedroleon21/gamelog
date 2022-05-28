@@ -8,6 +8,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Hashtable;
@@ -24,8 +25,13 @@ public class ResumeRest {
         return service.getAllResumes();
     }
     @GET
-    @Path("score")
-    public List<GameScore> buscarKillResume(){
-        return service.resumeKillsEPlacar();
+    @Path("/game/{game-key}")
+    public ResumeGame pegarGame(@PathParam("game-key") String gameKey){
+        return service.pegarReumo(gameKey);
+    }
+    @GET
+    @Path("scores")
+    public List<GameScore> buscarScoreAll(){
+        return service.resumirScores();
     }
 }

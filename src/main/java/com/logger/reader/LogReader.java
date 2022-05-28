@@ -59,6 +59,7 @@ public class LogReader {
         return Arrays.asList(eventos);
     }
 
+    //talvez mudar para streaming de arquivo??
     private String read() {
         try {
             return Files.readString(Path.of(filePath));
