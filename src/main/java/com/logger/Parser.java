@@ -13,7 +13,7 @@ public class Parser {
 
     public Game resumeGame(List<String> eventos) {
         int totalKills = eventos.stream().filter(e -> e.contains("Kill")).collect(Collectors.toList()).size();
-        List<Kill> kills = eventos.stream().filter(e -> e.contains("Kill") && !e.contains("<world>")).map(l -> mapKill(l)).collect(Collectors.toList());
+        List<Kill> kills = eventos.stream().filter(e -> e.contains("Kill")).map(l -> mapKill(l)).collect(Collectors.toList());
         List<String> players = eventos.stream().filter(e->e.contains("ClientUserinfoChanged")).map(s->takeNamePlayer(s)).distinct().collect(Collectors.toList());
         return new Game(totalKills,kills,players);
     }
