@@ -51,11 +51,6 @@ public class Dao {
     }
 
     public Game getGeme(int gameNumber) {
-        Hashtable<Integer, List<String>> hashGames = readGames();
-        if (gameNumber >= hashGames.size()) {
-            throw new IndexOutOfBoundsException("fora da quantidade de games");
-        }
-
-        return Parser.resumeGame(hashGames.get(gameNumber));
+        return Parser.resumeGame(readGames().get(gameNumber));
     }
 }
