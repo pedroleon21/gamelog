@@ -20,8 +20,13 @@ public class ServiceTester {
         assert (!tableResume.isEmpty());
     }
     @Test
-    void pegarResumo(){
+    void pegarGame(){
         Game game = service.pegarGame(new Random().nextInt(21));
         assert(Objects.nonNull(game));
+    }
+    @Test
+    void pegarResumo(){
+        ResumeGame resumo = service.pegarReumo("game_" + new Random().nextInt(21));
+        assert (Objects.nonNull(resumo));
     }
 }
