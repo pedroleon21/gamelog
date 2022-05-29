@@ -1,15 +1,13 @@
 package com.service;
 
 import com.dao.Dao;
-import com.entries.Game;
-import com.entries.GameScore;
-import com.entries.Kill;
-import com.entries.ResumeGame;
+import com.entries.*;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class Service {
@@ -41,13 +39,13 @@ public class Service {
         for (int i = 0; i < games.size(); i++) {
             Game game = games.get(i);
             int totalKills = game.getTotalKills();
-            List<String> players = game.getPlayers();
+            List<Player> players = game.getPlayers();
             Hashtable<String, Long> table = new Hashtable<String, Long>();
             players.forEach(p -> {
-                long total = game.getKills().stream().map(Kill::getKilled).filter(k -> k.equals(p)).count();
-                table.put(p, total);
+                long total = game.getKills().stream().map(Kill::getKilled).filter(k -> k.equals(p.getName())).count();
+                table.put(p.getName(), total);
             });
-            map.put("game_" + i, new ResumeGame(totalKills, players, table));
+            map.put("game_" + i, new ResumeGame(totalKills, players.stream().map(Player::getName).collect(Collectors.toList()), table));
         }
         return map;
     }

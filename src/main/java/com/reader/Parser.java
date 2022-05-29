@@ -26,8 +26,9 @@ public class Parser {
     public static Game resumeGame(List<String> eventos) {
         int totalKills = getTotalKills(eventos);
         List<Kill> kills = getListKills(eventos);
-        List<String> players = eventos.stream().filter(e -> e.contains("ClientUserinfoChanged")).map(s -> takeNamePlayer(s)).distinct().collect(Collectors.toList());
-        return new Game(totalKills, kills, players);
+        List<Item> items = eventos.stream().filter(e->e.contains("Item")).map(i->getItem(i)).collect(Collectors.toList());
+        List<Player> players = eventos.stream().filter(e -> e.contains("ClientUserinfoChanged")).map(s -> getPlayer(s)).distinct().collect(Collectors.toList());
+        return new Game(totalKills, kills, players, items);
     }
 
     private static List<Kill> getListKills(List<String> eventos) {
