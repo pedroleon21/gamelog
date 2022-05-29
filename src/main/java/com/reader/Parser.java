@@ -10,8 +10,6 @@ import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.stream.Collectors;
-
-@RequestScoped
 public class Parser {
 
     public static GameScore resumeKills(List<String> eventos) {
