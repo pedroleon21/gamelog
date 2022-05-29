@@ -5,13 +5,15 @@ import java.util.List;
 public class Game {
     private int totalKills;
     private List<Kill> kills;
-    private List<String> players;
+    private List<Player> players;
+    private List<Item> items;
 
-    public Game(int totalKills, List<Kill> kills, List<String> players) {
+    public Game(int totalKills, List<Kill> kills, List<Player> players, List<Item> items) {
         super();
         this.totalKills = totalKills;
         this.kills = kills;
         this.players = players;
+        this.items = items;
     }
 
     public int getTotalKills() {
@@ -30,11 +32,19 @@ public class Game {
         this.kills = kills;
     }
 
-    public List<String> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<String> players) {
+    public void setPlayers(List<Player> players) {
         this.players = players;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }
