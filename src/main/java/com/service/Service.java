@@ -16,6 +16,9 @@ public class Service {
     @Inject
     Dao dao;
 
+    public Service() {
+    }
+
     public Service(String path) {
         this.dao = new Dao(path);
     }
