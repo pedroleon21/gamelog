@@ -61,8 +61,7 @@ public class Parser {
     }
 
     public static List<String> breakLines(String file) {
-        String[] eventos = file.split("\\n");
-        return Arrays.asList(eventos);
+        return Arrays.asList(file.split("\\n"));
     }
 
     public static Hashtable<Integer, List<String>> eventosToGames(List<String> eventos) {

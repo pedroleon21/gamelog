@@ -6,24 +6,38 @@ import com.entries.Kill;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Objects;
 
 public class ParserTester {
     static String filePath = "games.log";
-    static Dao dao = new Dao(new LogReader(filePath));
+    static LogReader reader = new LogReader(filePath);
+    static Dao dao = new Dao(reader);
     static String killLine;
     private static String worldKillLine;
     private static String clientUserInfoLine;
+    private static String file;
+    private static List<String> eventos;
 
     @BeforeAll
     static void pegarUmaKill() {
-        List<String> eventos = dao.getAllEvents();
+        file = reader.read();
+        eventos = dao.getAllEvents();
         killLine = eventos.stream().filter(x -> x.contains("Kill") && !x.contains("<world>")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
         worldKillLine = eventos.stream().filter(x -> x.contains("Kill") && x.contains("<world>")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
         clientUserInfoLine = eventos.stream().filter(x -> x.contains("ClientUserinfoChanged")).findFirst().map(x -> x).orElseThrow(RuntimeException::new); //ClientUserinfoChanged
     }
-
+    @Test
+    void breakLineTester(){
+        List<String> linhas = Parser.breakLines(file);
+        assert (!linhas.isEmpty());
+    }
+    @Test
+    void parseGames(){
+        Hashtable<Integer, List<String>> games= Parser.eventosToGames(eventos);
+        assert (!games.isEmpty());
+    }
     @Test
     void maperKill() {
         Kill kill = Parser.mapKill(killLine);
