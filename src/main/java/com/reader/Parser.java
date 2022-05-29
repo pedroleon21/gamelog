@@ -1,8 +1,6 @@
 package com.reader;
 
-import com.entries.GameScore;
-import com.entries.Kill;
-import com.entries.Game;
+import com.entries.*;
 
 import javax.enterprise.context.RequestScoped;
 import java.util.ArrayList;
@@ -75,5 +73,15 @@ public class Parser {
             game.add(evento);
         }
         return games;
+    }
+
+    public static Player getPlayer(String clientUserInfoLine) {
+        String[] splited = clientUserInfoLine.trim().split(" ");
+        return new Player(Integer.parseInt(splited[2]),takeNamePlayer(clientUserInfoLine));
+    }
+
+    public static Item getItem(String itemLine) {
+        String[] splited = itemLine.trim().split(" ");
+        return new Item(splited[0],Integer.parseInt(splited[2]),splited[3]);
     }
 }

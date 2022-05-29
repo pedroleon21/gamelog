@@ -2,7 +2,9 @@ package com.reader;
 
 import com.dao.Dao;
 import com.entries.Game;
+import com.entries.Item;
 import com.entries.Kill;
+import com.entries.Player;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +21,7 @@ public class ParserTester {
     private static String clientUserInfoLine;
     private static String file;
     private static List<String> eventos;
+    private static String itemLine;
 
     @BeforeAll
     static void pegarUmaKill() {
@@ -27,6 +30,7 @@ public class ParserTester {
         killLine = eventos.stream().filter(x -> x.contains("Kill") && !x.contains("<world>")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
         worldKillLine = eventos.stream().filter(x -> x.contains("Kill") && x.contains("<world>")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
         clientUserInfoLine = eventos.stream().filter(x -> x.contains("ClientUserinfoChanged")).findFirst().map(x -> x).orElseThrow(RuntimeException::new); //ClientUserinfoChanged
+        itemLine = eventos.stream().filter(x -> x.contains("Item")).findFirst().map(x -> x).orElseThrow(RuntimeException::new);
     }
     @Test
     void breakLineTester(){
@@ -68,5 +72,20 @@ public class ParserTester {
         assert (Objects.nonNull(player));
         assert (!player.isEmpty());
         System.out.println(player);
+    }
+    @Test
+    void parsePlayer(){
+        Player player = Parser.getPlayer(clientUserInfoLine);
+        assert (Objects.nonNull(player));
+        assert (Objects.nonNull(player.getName()));
+        assert (Objects.nonNull(player.getPlayerId()));
+    }
+    @Test
+    void parseItem(){
+        Item item = Parser.getItem(itemLine);
+        assert (Objects.nonNull(item));
+        assert (Objects.nonNull(item.getTime()));
+        assert (Objects.nonNull(item.getPlayerId()));
+        assert (Objects.nonNull(item.getWeapon()));
     }
 }
