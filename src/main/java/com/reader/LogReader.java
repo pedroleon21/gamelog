@@ -16,7 +16,6 @@ public class LogReader {
     @ConfigProperty(name = "log.file.path")
     String filePath;
 
-
     public LogReader() {
     }
 
@@ -31,11 +30,4 @@ public class LogReader {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
-
-
-
 }

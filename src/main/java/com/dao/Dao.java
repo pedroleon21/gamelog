@@ -24,6 +24,10 @@ public class Dao {
         this.reader = reader;
     }
 
+    public Dao(String path) {
+        this.reader = new LogReader(path);
+    }
+
     public   List<String> getAllEvents() {
         String file = reader.read();
         return Parser.breakLines(file);
