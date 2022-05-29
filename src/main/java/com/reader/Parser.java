@@ -43,14 +43,8 @@ public class Parser {
         if (!line.contains("Kill")) {
             throw new LineMapException("Erro ao mapear morte");
         }
-        String[] splited = line.trim().split("Kill");
-        String time = splited[0];
-        splited = splited[1].trim().split(":");
-        String numbers = splited[1].trim();
-        String killer = splited[2].trim().split("killed")[0].trim();
-        String killed = splited[2].split("killed")[1].trim().split("by")[0].trim();
-        String cause = splited[2].split("killed")[1].trim().split("by")[1].trim();
-        return new Kill(killer, killed, cause, time);
+        String[] splited = line.trim().split(" ");
+        return new Kill(splited[5],splited[7],splited[9],splited[0]);
     }
 
     public static String takeNamePlayer(String line) {
