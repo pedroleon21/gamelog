@@ -11,25 +11,26 @@ import java.util.Objects;
 import java.util.Random;
 
 
-public class RestLoggerTester extends RestAssuredUtils{
+public class RestEventoTester extends RestAssuredUtils {
     private String path = "evento";
 
     @Test
-    void getRaw(){
+    void getRaw() {
         getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()
-                .get(path+"/raw")
+                .get(path + "/raw")
                 .then()
                 .assertThat()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
+
     @Test
-    void getGameList(){
+    void getGameList() {
         Game[] gamesSet = getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()
-                .get("logger")
+                .get(path)
                 .then()
                 .assertThat()
                 .statusCode(Response.Status.OK.getStatusCode())
@@ -38,8 +39,9 @@ public class RestLoggerTester extends RestAssuredUtils{
         List<Game> gamesList = Arrays.asList(gamesSet);
         assert (!gamesList.isEmpty());
     }
+
     @Test
-    void getGame(){
+    void getGame() {
         Game game = getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()

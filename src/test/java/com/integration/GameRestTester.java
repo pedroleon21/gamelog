@@ -12,12 +12,13 @@ import java.util.Objects;
 import java.util.Random;
 
 public class GameRestTester extends RestAssuredUtils {
+    String path = "game";
     @Test
     void resumoGemes() {
         getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()
-                .get("game")
+                .get(path)
                 .then()
                 .assertThat()
                 .statusCode(Response.Status.OK.getStatusCode());
@@ -27,7 +28,7 @@ public class GameRestTester extends RestAssuredUtils {
         ResumeGame placar = getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()
-                .get("game/game_" + new Random().nextInt(21))
+                .get(path +"/game_" + new Random().nextInt(21))
                 .then()
                 .assertThat()
                 .statusCode(Response.Status.OK.getStatusCode())
