@@ -18,8 +18,8 @@ Por padrão a aplicação será exposta na rota http://localhost:5000
 * rodada resumida: http://localhost:5000/v1/game/game_{gameIndex}
 * lista de placar de todos as rodadas: http://localhost:5000/v1/score
 * placar da rodada: http://localhost:5000/v1/score/{indexGame}
-* lista de games e lista de kills http://localhost:5000/v1/logger
-* game com lista de kills http://localhost:5000/v1/logger/{indexGame}
+* lista de games e lista de kills http://localhost:5000/v1/evento
+* game com lista de kills http://localhost:5000/v1/evento/{indexGame}
 ## Testes
 Para execução dos testes do pacote `com.integration` é necessário que a api esteja em funcionamento;
 Os demais testes são testes unitários e os recursos são providos dentro das proprias classes.

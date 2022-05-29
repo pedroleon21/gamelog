@@ -12,12 +12,14 @@ import java.util.Random;
 
 
 public class RestLoggerTester extends RestAssuredUtils{
+    private String path = "evento";
+
     @Test
     void getRaw(){
         getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()
-                .get("logger/raw")
+                .get(path+"/raw")
                 .then()
                 .assertThat()
                 .statusCode(Response.Status.OK.getStatusCode());
@@ -41,7 +43,7 @@ public class RestLoggerTester extends RestAssuredUtils{
         Game game = getConfiguredGiven()
                 .contentType(MediaType.APPLICATION_JSON)
                 .log().all()
-                .get("logger/" + new Random().nextInt(21))
+                .get("evento/" + new Random().nextInt(21))
                 .then()
                 .assertThat()
                 .statusCode(Response.Status.OK.getStatusCode())

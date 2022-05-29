@@ -13,10 +13,10 @@ import javax.ws.rs.core.MediaType;
 import java.util.Hashtable;
 import java.util.List;
 
-@Path("v1/logger")
+@Path("v1/evento")
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
-public class LoggerRest {
+public class EventoRest {
     @Inject
     Service service;
     @GET
