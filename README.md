@@ -14,10 +14,10 @@ Já existe um na raiz do projeto que sera usado por padrão.
 Por padrão a aplicação será exposta na rota http://localhost:5000
 
 ## Lista de recursos
-* lista de rodadas resumidas: http://localhost:5000/game
-* rodada resumida: http://localhost:5000/game/game_{gameIndex}
-* lista de placar de todos as rodadas: http://localhost:5000/score
-* placar da rodada: http://localhost:5000/score/{indexGame}
+* lista de rodadas resumidas: http://localhost:5000/v1/game
+* rodada resumida: http://localhost:5000/v1/game/game_{gameIndex}
+* lista de placar de todos as rodadas: http://localhost:5000/v1/score
+* placar da rodada: http://localhost:5000/v1/score/{indexGame}
 * lista de games e lista de kills http://localhost:5000/v1/logger
 * game com lista de kills http://localhost:5000/v1/logger/{indexGame}
 ## Testes
