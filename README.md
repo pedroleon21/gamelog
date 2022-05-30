@@ -23,3 +23,9 @@ Por padrão a aplicação será exposta na rota http://localhost:5000
 ## Testes
 Para execução dos testes do pacote `com.integration` é necessário que a api esteja em funcionamento;
 Os demais testes são testes unitários e os recursos são providos dentro das proprias classes.
+```shell script
+./mvnw compile quarkus:dev
+```
+```
+Pressione [r] para executar os testes.
+```
