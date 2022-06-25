@@ -29,3 +29,5 @@ Os demais testes são testes unitários e os recursos são providos dentro das p
 ```
 Pressione [r] para executar os testes.
 ```
+* Foram feitos testes de integração para e unitários.
+* Problemas: Os teste unitãrios não foram feitos com melhor qualidade. eu aproveitei o testes para desenvolver a aplicação em si, numa especie de TDD e falta de habilidade com mickito.
